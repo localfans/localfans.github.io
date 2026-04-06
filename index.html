@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bluefans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>localfans — CRM &amp; Loyalty for Local Businesses</title>
+  <meta name="description" content="localfans helps local businesses monetize their audience with zero upfront cost. Vouchers, subscriptions, WhatsApp-native communication, and AI-assisted offers." />
+  <meta name="theme-color" content="#255FE5" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="localfans — CRM & Loyalty for Local Businesses" />
+  <meta property="og:description" content="Empower your local business with vouchers, subscriptions, and direct customer communication. Zero upfront cost." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://localfans.github.io" />
+  <meta property="og:image" content="https://localfans.github.io/assets/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- daisyUI 5 + Tailwind CSS 4 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    /* ── Custom localfans themes matching the olympus codebase ── */
+    @theme {
+      --color-localfans-blue: oklch(52% 0.14 175);
+      --color-localfans-coral: oklch(62% 0.16 25);
+      --color-localfans-gold: oklch(75% 0.14 85);
+      --color-localfans-dark: oklch(22% 0.02 250);
+    }
+
+    :root {
+      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* ── bluefans theme (green base, blue-ish primary, pink/purple secondary) ── */
+    [data-theme="bluefans"] {
+      color-scheme: light;
+      --color-base-100: oklch(98.5% 0.004 250);
+      --color-base-200: oklch(94% 0.008 250);
+      --color-base-300: oklch(89% 0.012 250);
+      --color-base-content: oklch(22% 0.02 250);
+      --color-primary: oklch(50% 0.19 250);
+      --color-primary-content: oklch(98% 0.005 250);
+      --color-secondary: oklch(55% 0.18 315);
+      --color-secondary-content: oklch(98% 0.005 315);
+      --color-accent: oklch(75% 0.14 85);
+      --color-accent-content: oklch(20% 0.04 85);
+      --color-neutral: oklch(32% 0.02 250);
+      --color-neutral-content: oklch(92% 0.005 250);
+      --color-info: oklch(62% 0.15 230);
+      --color-info-content: oklch(98% 0.005 230);
+      --color-success: oklch(62% 0.18 140);
+      --color-success-content: oklch(98% 0.005 140);
+      --color-warning: oklch(80% 0.14 80);
+      --color-warning-content: oklch(20% 0.04 80);
+      --color-error: oklch(58% 0.2 25);
+      --color-error-content: oklch(98% 0.005 25);
+      --radius-selector: 0.5rem;
+      --radius-field: 0.5rem;
+      --radius-box: 0.75rem;
+      --size-selector: 0.25rem;
+      --size-field: 0.25rem;
+      --border: 1px;
+      --depth: 1;
+      --noise: 0;
+    }
+
+    /* ── lightfans theme ── */
+    [data-theme="lightfans"] {
+      color-scheme: light;
+      --color-base-100: oklch(98.5% 0.004 250);
+      --color-base-200: oklch(94% 0.008 250);
+      --color-base-300: oklch(89% 0.012 250);
+      --color-base-content: oklch(22% 0.02 250);
+      --color-primary: oklch(52% 0.14 175);
+      --color-primary-content: oklch(98% 0.005 175);
+      --color-secondary: oklch(62% 0.16 25);
+      --color-secondary-content: oklch(98% 0.005 25);
+      --color-accent: oklch(75% 0.14 85);
+      --color-accent-content: oklch(20% 0.04 85);
+      --color-neutral: oklch(32% 0.02 250);
+      --color-neutral-content: oklch(92% 0.005 250);
+      --color-info: oklch(67% 0.15 230);
+      --color-info-content: oklch(98% 0.005 230);
+      --color-success: oklch(64% 0.17 155);
+      --color-success-content: oklch(98% 0.005 155);
+      --color-warning: oklch(80% 0.14 80);
+      --color-warning-content: oklch(20% 0.04 80);
+      --color-error: oklch(58% 0.2 25);
+      --color-error-content: oklch(98% 0.005 25);
+      --radius-selector: 0.5rem;
+      --radius-field: 0.5rem;
+      --radius-box: 0.75rem;
+      --size-selector: 0.25rem;
+      --size-field: 0.25rem;
+      --border: 1px;
+      --depth: 1;
+      --noise: 0;
+    }
+
+    /* ── bluedarkfans theme (dark base, blue-ish primary, pink/purple secondary) ── */
+    [data-theme="bluedarkfans"] {
+      color-scheme: dark;
+      --color-base-100: oklch(20% 0.015 250);
+      --color-base-200: oklch(25% 0.015 250);
+      --color-base-300: oklch(30% 0.015 250);
+      --color-base-content: oklch(90% 0.005 250);
+      --color-primary: oklch(65% 0.17 250);
+      --color-primary-content: oklch(15% 0.02 250);
+      --color-secondary: oklch(68% 0.16 315);
+      --color-secondary-content: oklch(15% 0.02 315);
+      --color-accent: oklch(80% 0.12 85);
+      --color-accent-content: oklch(15% 0.04 85);
+      --color-neutral: oklch(75% 0.01 250);
+      --color-neutral-content: oklch(18% 0.01 250);
+      --color-info: oklch(72% 0.12 230);
+      --color-info-content: oklch(15% 0.02 230);
+      --color-success: oklch(68% 0.16 140);
+      --color-success-content: oklch(15% 0.02 140);
+      --color-warning: oklch(82% 0.12 80);
+      --color-warning-content: oklch(15% 0.04 80);
+      --color-error: oklch(68% 0.18 25);
+      --color-error-content: oklch(15% 0.02 25);
+      --radius-selector: 0.5rem;
+      --radius-field: 0.5rem;
+      --radius-box: 0.75rem;
+      --size-selector: 0.25rem;
+      --size-field: 0.25rem;
+      --border: 1px;
+      --depth: 1;
+      --noise: 0;
+    }
+
+    /* ── darkfans theme ── */
+    [data-theme="darkfans"] {
+      color-scheme: dark;
+      --color-base-100: oklch(20% 0.015 250);
+      --color-base-200: oklch(25% 0.015 250);
+      --color-base-300: oklch(30% 0.015 250);
+      --color-base-content: oklch(90% 0.005 250);
+      --color-primary: oklch(68% 0.15 175);
+      --color-primary-content: oklch(15% 0.02 175);
+      --color-secondary: oklch(72% 0.14 25);
+      --color-secondary-content: oklch(15% 0.02 25);
+      --color-accent: oklch(80% 0.12 85);
+      --color-accent-content: oklch(15% 0.04 85);
+      --color-neutral: oklch(75% 0.01 250);
+      --color-neutral-content: oklch(18% 0.01 250);
+      --color-info: oklch(72% 0.12 230);
+      --color-info-content: oklch(15% 0.02 230);
+      --color-success: oklch(70% 0.15 155);
+      --color-success-content: oklch(15% 0.02 155);
+      --color-warning: oklch(82% 0.12 80);
+      --color-warning-content: oklch(15% 0.04 80);
+      --color-error: oklch(68% 0.18 25);
+      --color-error-content: oklch(15% 0.02 25);
+      --radius-selector: 0.5rem;
+      --radius-field: 0.5rem;
+      --radius-box: 0.75rem;
+      --size-selector: 0.25rem;
+      --size-field: 0.25rem;
+      --border: 1px;
+      --depth: 1;
+      --noise: 0;
+    }
+
+    /* Gradient text utility */
+    .text-gradient {
+      background: linear-gradient(135deg, oklch(50% 0.19 250), oklch(55% 0.18 315));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="lightfans"] .text-gradient {
+      background: linear-gradient(135deg, oklch(52% 0.14 175), oklch(62% 0.16 25));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="bluedarkfans"] .text-gradient {
+      background: linear-gradient(135deg, oklch(65% 0.17 250), oklch(68% 0.16 315));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="darkfans"] .text-gradient {
+      background: linear-gradient(135deg, oklch(68% 0.15 175), oklch(72% 0.14 25));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hero floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+
+    @keyframes float-delayed {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glass effect */
+    .glass-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    [data-theme="bluedarkfans"] .glass-card {
+      background: rgba(30,30,45,0.7);
+      border: 1px solid rgba(100,140,255,0.1);
+    }
+
+    [data-theme="darkfans"] .glass-card {
+      background: rgba(30,30,45,0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Glow pulse for CTA */
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px color-mix(in oklch, var(--color-primary) 30%, transparent); }
+      50% { box-shadow: 0 0 40px color-mix(in oklch, var(--color-primary) 50%, transparent); }
+    }
+    .glow-cta { animation: glow-pulse 3s ease-in-out infinite; }
+
+    /* Stat counter styling */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased bg-base-100 text-base-content">
+
+  <!-- ════════════════════════════════════════════════════════════
+       NAVBAR
+       ════════════════════════════════════════════════════════════ -->
+  <nav class="navbar fixed top-0 z-50 px-4 lg:px-8 transition-all duration-300" id="main-nav">
+    <div class="navbar-start">
+      <a href="#" class="flex items-center gap-2">
+        <svg class="w-9 h-9" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100.467 26.4004C89.3758 26.397 78.4943 29.4253 68.9991 35.158C59.5038 40.8907 51.7561 49.1097 46.5935 58.9266C41.4308 68.7434 39.0495 79.7846 39.7072 90.8567C40.3648 101.929 44.0362 112.61 50.3246 121.747C51.6406 123.699 59.6848 132.438 59.6848 132.438L100.275 173.739V148.142H100.467C116.447 147.893 131.688 141.37 142.9 129.982C154.113 118.593 160.397 103.253 160.397 87.2713C160.397 71.2897 154.113 55.949 142.9 44.5606C131.688 33.1722 116.447 26.6495 100.467 26.4004ZM100.467 121.629H100.275V136.076L75.6104 110.938C69.514 104.57 66.1129 96.0941 66.1171 87.2787C66.1171 86.1844 66.1171 85.1345 66.265 84.0699C66.8841 77.4375 69.4174 71.128 73.5568 65.909C77.6961 60.6901 83.2631 56.0717 89.5803 54.6736C95.8974 52.5606 102.693 52.3291 109.139 54.0072C115.585 55.6854 120.803 59.2009 125.89 64.126C130.375 69.0512 133.332 75.1736 134.401 81.7484C135.47 88.3233 134.605 95.0672 131.912 101.16C129.218 107.252 124.812 112.43 119.23 116.064C113.647 119.698 107.129 121.632 100.467 121.629Z" fill="currentColor"/>
+        </svg>
+        <span class="text-xl font-bold tracking-tight">localfans</span>
+      </a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal gap-1 text-sm font-medium">
+        <li><a href="#features" class="rounded-lg">Features</a></li>
+        <li><a href="#how-it-works" class="rounded-lg">How It Works</a></li>
+        <li><a href="#for-businesses" class="rounded-lg">For Businesses</a></li>
+        <li><a href="#for-consumers" class="rounded-lg">For Consumers</a></li>
+        <li><a href="#pricing" class="rounded-lg">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end gap-2">
+      <!-- Theme cycle button -->
+      <button id="theme-toggle" class="btn btn-ghost btn-circle btn-sm" aria-label="Switch theme">
+        <!-- Blue theme icon (palette) -->
+        <svg class="theme-icon w-5 h-5" data-theme-icon="bluefans" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+        <!-- Blue dark theme icon (moon+stars) -->
+        <svg class="theme-icon w-5 h-5 hidden" data-theme-icon="bluedarkfans" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 2l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" /></svg>
+        <!-- Teal/green theme icon (leaf/sun) -->
+        <svg class="theme-icon w-5 h-5 hidden" data-theme-icon="lightfans" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,17l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+        <!-- Dark theme icon (moon) -->
+        <svg class="theme-icon w-5 h-5 hidden" data-theme-icon="darkfans" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
+      </button>
+      <!-- Mobile menu -->
+      <div class="dropdown dropdown-end lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </div>
+        <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-50 w-52 p-2 shadow-lg">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#for-businesses">For Businesses</a></li>
+          <li><a href="#for-consumers">For Consumers</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <a href="#waitlist" class="btn btn-primary btn-sm hidden sm:inline-flex">Get Early Access</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center overflow-hidden pt-16">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-float-delayed"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: Copy -->
+        <div class="max-w-xl">
+          <div class="badge badge-outline badge-primary mb-6 gap-2 py-3 px-4">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Coming Soon — Join the Waitlist
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6">
+            Your Customers,<br/>
+            <span class="text-gradient">Your Revenue.</span><br/>
+            Zero Upfront.
+          </h1>
+
+          <p class="text-lg text-base-content/70 mb-8 leading-relaxed max-w-lg">
+            localfans is the CRM and loyalty platform built for local businesses.
+            Create vouchers, launch subscriptions, and communicate directly with customers
+            through WhatsApp — all with <strong>no upfront cost</strong>.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#waitlist" class="btn btn-primary btn-lg glow-cta">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              Get Early Access
+            </a>
+            <a href="#how-it-works" class="btn btn-ghost btn-lg">
+              See How It Works
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+            </a>
+          </div>
+
+          <!-- Social proof -->
+          <div class="mt-10 flex items-center gap-4">
+            <div class="avatar-group -space-x-3">
+              <div class="avatar w-10 h-10"><div class="rounded-full bg-primary/20 flex items-center justify-center"><span class="text-xs font-bold text-primary">JA</span></div></div>
+              <div class="avatar w-10 h-10"><div class="rounded-full bg-secondary/20 flex items-center justify-center"><span class="text-xs font-bold text-secondary">MK</span></div></div>
+              <div class="avatar w-10 h-10"><div class="rounded-full bg-accent/20 flex items-center justify-center"><span class="text-xs font-bold text-accent">RL</span></div></div>
+              <div class="avatar w-10 h-10"><div class="rounded-full bg-info/20 flex items-center justify-center"><span class="text-xs font-bold text-info">+</span></div></div>
+            </div>
+            <p class="text-sm text-base-content/60">
+              <span class="font-semibold text-base-content">Early adopters</span> already on the waitlist
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Hero visual -->
+        <div class="relative hidden lg:flex justify-center items-center">
+          <div class="relative w-80 h-[560px]">
+            <!-- Phone mockup -->
+            <div class="mockup-phone border-primary/20 shadow-2xl">
+              <div class="mockup-phone-camera"></div>
+              <div class="mockup-phone-display">
+                <div class="bg-base-200 w-full h-full flex flex-col">
+                  <!-- Mock app header -->
+                  <div class="bg-primary px-4 py-3 flex items-center gap-3">
+                    <svg class="w-6 h-6 text-primary-content" viewBox="0 0 200 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100.467 26.4C89.376 26.397 78.494 29.425 69 35.158C59.504 40.891 51.756 49.11 46.594 58.927C41.431 68.743 39.05 79.785 39.707 90.857C40.365 101.929 44.036 112.61 50.325 121.747C51.641 123.699 59.685 132.438 59.685 132.438L100.275 173.739V148.142H100.467C116.447 147.893 131.688 141.37 142.9 129.982C154.113 118.593 160.397 103.253 160.397 87.271C160.397 71.29 154.113 55.949 142.9 44.561C131.688 33.172 116.447 26.65 100.467 26.4ZM100.467 121.629H100.275V136.076L75.61 110.938C69.514 104.57 66.113 96.094 66.117 87.279C66.117 86.184 66.117 85.134 66.265 84.07C66.884 77.438 69.417 71.128 73.557 65.909C77.696 60.69 83.263 56.072 89.58 54.674C95.897 52.561 102.693 52.329 109.139 54.007C115.585 55.685 120.803 59.201 125.89 64.126C130.375 69.051 133.332 75.174 134.401 81.748C135.47 88.323 134.605 95.067 131.912 101.16C129.218 107.252 124.812 112.43 119.23 116.064C113.647 119.698 107.129 121.632 100.467 121.629Z"/>
+                    </svg>
+                    <span class="text-primary-content font-semibold text-sm">localfans</span>
+                  </div>
+                  <!-- Mock store cards -->
+                  <div class="p-3 space-y-3 overflow-hidden">
+                    <div class="card bg-base-100 shadow-sm">
+                      <div class="card-body p-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-lg">☕</div>
+                          <div>
+                            <p class="font-semibold text-sm">Café Milano</p>
+                            <p class="text-xs text-base-content/50">0.3 km away</p>
+                          </div>
+                          <span class="badge badge-primary badge-sm ml-auto">New</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card bg-primary/5 border border-primary/20 shadow-sm">
+                      <div class="card-body p-3">
+                        <p class="text-xs font-semibold text-primary mb-1">VOUCHER</p>
+                        <p class="font-bold text-sm">2 Coffees for €5</p>
+                        <p class="text-xs text-base-content/50">Valid until April 30</p>
+                        <div class="card-actions mt-2">
+                          <button class="btn btn-primary btn-xs btn-block">Redeem</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-sm">
+                      <div class="card-body p-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-lg">🍕</div>
+                          <div>
+                            <p class="font-semibold text-sm">Pizza Roma</p>
+                            <p class="text-xs text-base-content/50">0.8 km away</p>
+                          </div>
+                          <div class="badge badge-secondary badge-outline badge-sm ml-auto">Member</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card bg-secondary/5 border border-secondary/20 shadow-sm">
+                      <div class="card-body p-3">
+                        <p class="text-xs font-semibold text-secondary mb-1">SUBSCRIPTION</p>
+                        <p class="font-bold text-sm">VIP Lunch Plan</p>
+                        <p class="text-xs text-base-content/50">€9.99/month • 3 perks included</p>
+                        <progress class="progress progress-secondary w-full mt-1" value="65" max="100"></progress>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Floating notification card -->
+            <div class="absolute -right-16 top-24 glass-card rounded-2xl p-4 shadow-xl animate-float-delayed w-56">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-success/20 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <div>
+                  <p class="text-xs font-bold">Voucher Redeemed!</p>
+                  <p class="text-xs text-base-content/50">2 Coffees for €5</p>
+                </div>
+              </div>
+            </div>
+            <!-- Floating revenue card -->
+            <div class="absolute -left-20 bottom-40 glass-card rounded-2xl p-4 shadow-xl animate-float w-52">
+              <p class="text-xs text-base-content/50 mb-1">Monthly Revenue</p>
+              <p class="text-2xl font-black text-gradient stat-number">€2,340</p>
+              <div class="flex items-center gap-1 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                <span class="text-xs font-semibold text-success">+24% this month</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       LOGOS / TRUST BAR
+       ════════════════════════════════════════════════════════════ -->
+  <section class="py-12 border-y border-base-200">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <p class="text-sm text-base-content/40 uppercase tracking-widest mb-8 font-medium">Powered By</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-16 text-base-content/30">
+        <!-- Stripe -->
+        <div class="flex items-center gap-2 text-base-content/40">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-7.076-2.19l-.893 5.575C4.747 22.828 7.757 24 11.29 24c2.6 0 4.507-.629 5.78-1.756 1.4-1.254 2.172-3.145 2.172-5.59 0-4.107-2.476-5.734-5.266-7.504z"/></svg>
+          <span class="font-semibold text-sm">Stripe</span>
+        </div>
+        <!-- WhatsApp -->
+        <div class="flex items-center gap-2 text-base-content/40">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="font-semibold text-sm">WhatsApp</span>
+        </div>
+        <!-- Google Maps -->
+        <div class="flex items-center gap-2 text-base-content/40">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C7.802 0 4 3.403 4 7.602 4 11.8 7.469 16.812 12 24c4.531-7.188 8-12.2 8-16.398C20 3.403 16.199 0 12 0zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+          <span class="font-semibold text-sm">Google Maps</span>
+        </div>
+        <!-- AI -->
+        <div class="flex items-center gap-2 text-base-content/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" /></svg>
+          <span class="font-semibold text-sm">AI-Powered</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FEATURES
+       ════════════════════════════════════════════════════════════ -->
+  <section id="features" class="py-24 lg:py-32">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-in">
+        <span class="badge badge-primary badge-outline mb-4">Features</span>
+        <h2 class="text-3xl lg:text-5xl font-black tracking-tight mb-4">
+          Everything Your Business Needs
+        </h2>
+        <p class="text-base-content/60 text-lg">
+          A complete toolkit to attract, retain, and monetize your local customer base.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+            </div>
+            <h3 class="card-title text-lg">Vouchers &amp; Offers</h3>
+            <p class="text-base-content/60 text-sm">Create time-limited deals, schedule offers for slow hours, and drive foot traffic with instant redeemable vouchers.</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+            </div>
+            <h3 class="card-title text-lg">Subscriptions</h3>
+            <p class="text-base-content/60 text-sm">Launch membership plans with included perks. Predictable recurring revenue for your business, ongoing value for your customers.</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+            </div>
+            <h3 class="card-title text-lg">WhatsApp &amp; Email</h3>
+            <p class="text-base-content/60 text-sm">Reach customers where they already are. Send targeted offers, updates, and personalized messages via WhatsApp and email.</p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-warning/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </div>
+            <h3 class="card-title text-lg">Know Your Customers</h3>
+            <p class="text-base-content/60 text-sm">Collect birthdays, preferences, and visit data. Personalize offers and build genuine relationships with your regulars.</p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-info/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-info" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+            </div>
+            <h3 class="card-title text-lg">Map Discovery</h3>
+            <p class="text-base-content/60 text-sm">Consumers find you on the map. Google Maps-verified stores get discovered by nearby customers looking for local deals.</p>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="card bg-base-200/50 hover:bg-base-200 transition-colors duration-300 fade-in">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+            </div>
+            <h3 class="card-title text-lg">AI-Assisted Creation</h3>
+            <p class="text-base-content/60 text-sm">Not sure what to offer? AI helps you create compelling deals, suggests optimal pricing, and identifies the best times to run promotions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       HOW IT WORKS
+       ════════════════════════════════════════════════════════════ -->
+  <section id="how-it-works" class="py-24 lg:py-32 bg-base-200/30">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-in">
+        <span class="badge badge-secondary badge-outline mb-4">How It Works</span>
+        <h2 class="text-3xl lg:text-5xl font-black tracking-tight mb-4">
+          Live in Minutes, Not Months
+        </h2>
+        <p class="text-base-content/60 text-lg">
+          Three simple steps to start growing your local business.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Step 1 -->
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="text-3xl font-black text-primary">1</span>
+            <div class="absolute -right-3 top-1/2 -translate-y-1/2 hidden md:block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-base-content/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Register Your Store</h3>
+          <p class="text-base-content/60 text-sm">
+            Add your business with a Google Maps location. Connect Stripe for payments. You're verified and ready.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="text-3xl font-black text-secondary">2</span>
+            <div class="absolute -right-3 top-1/2 -translate-y-1/2 hidden md:block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-base-content/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Create Your Offers</h3>
+          <p class="text-base-content/60 text-sm">
+            Design vouchers, set up subscription plans with perks, and schedule promotions for your quieter hours — with AI help.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6">
+            <span class="text-3xl font-black text-success">3</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Grow &amp; Earn</h3>
+          <p class="text-base-content/60 text-sm">
+            Customers discover and subscribe. You earn revenue. localfans only charges when you make money. Print QR codes for in-store promotion.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOR BUSINESSES
+       ════════════════════════════════════════════════════════════ -->
+  <section id="for-businesses" class="py-24 lg:py-32">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left: Visual -->
+        <div class="fade-in">
+          <div class="stats stats-vertical shadow-xl w-full bg-base-200/60">
+            <div class="stat">
+              <div class="stat-figure text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+              </div>
+              <div class="stat-title">Active Members</div>
+              <div class="stat-value text-primary stat-number">847</div>
+              <div class="stat-desc text-success">↗︎ 12% more than last month</div>
+            </div>
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+              </div>
+              <div class="stat-title">Vouchers Redeemed</div>
+              <div class="stat-value text-secondary stat-number">1,294</div>
+              <div class="stat-desc text-success">↗︎ 31% increase</div>
+            </div>
+            <div class="stat">
+              <div class="stat-figure text-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div class="stat-title">Revenue This Month</div>
+              <div class="stat-value stat-number">€4,200</div>
+              <div class="stat-desc text-success">↗︎ Predictable & growing</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Copy -->
+        <div class="fade-in">
+          <span class="badge badge-accent badge-outline mb-4">For Business Owners</span>
+          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+            Stop Guessing.<br/>Start Growing.
+          </h2>
+          <div class="space-y-4 text-base-content/70">
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong>No upfront cost.</strong> localfans earns only when you earn. Simple revenue share model.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong>Fill quiet hours.</strong> Schedule offers for off-peak times to balance demand across your day.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong>Predictable revenue.</strong> Subscriptions bring recurring income. Know what next month looks like.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong>QR code redemption.</strong> Instant, tamper-proof validation. No paper coupons. No hassle.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong>Team management.</strong> Add Managers and Staff to your store. Run your business collaboratively.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOR CONSUMERS
+       ════════════════════════════════════════════════════════════ -->
+  <section id="for-consumers" class="py-24 lg:py-32 bg-base-200/30">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left: Copy -->
+        <div class="fade-in lg:order-1">
+          <span class="badge badge-secondary badge-outline mb-4">For Consumers</span>
+          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6">
+            Your Favorite Spots.<br/>Better Prices.
+          </h2>
+          <div class="space-y-4 text-base-content/70">
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+              <p><strong>Support local businesses.</strong> Subscribe to your favorite spots and unlock exclusive deals.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+              <p><strong>Real value, not gimmicks.</strong> Genuine discounts from real businesses. 2 coffees for €5. Free dessert with lunch.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <p><strong>Discover nearby gems.</strong> Find participating stores on the map. Explore offers wherever you are.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+              <p><strong>Share with friends.</strong> Forward vouchers to friends and let them discover great local businesses too.</p>
+            </div>
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+              <p><strong>Instant redemption.</strong> Show your QR code, get your deal. No paper coupons. No waiting.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="fade-in lg:order-2">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="card bg-base-100 shadow-lg h-full">
+              <div class="card-body items-center text-center p-5">
+                <div class="text-4xl mb-2">☕</div>
+                <h4 class="font-bold text-sm">Café Milano</h4>
+                <p class="text-xs text-base-content/50">Coffee & pastries</p>
+                <div class="badge badge-primary badge-sm mt-2">3 offers</div>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg h-full">
+              <div class="card-body items-center text-center p-5">
+                <div class="text-4xl mb-2">🍕</div>
+                <h4 class="font-bold text-sm">Pizza Roma</h4>
+                <p class="text-xs text-base-content/50">Italian cuisine</p>
+                <div class="badge badge-secondary badge-sm mt-2">VIP Plan</div>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg h-full">
+              <div class="card-body items-center text-center p-5">
+                <div class="text-4xl mb-2">💇</div>
+                <h4 class="font-bold text-sm">Style Studio</h4>
+                <p class="text-xs text-base-content/50">Hair & beauty</p>
+                <div class="badge badge-accent badge-sm mt-2">2 perks</div>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg h-full">
+              <div class="card-body items-center text-center p-5">
+                <div class="text-4xl mb-2">🏋️</div>
+                <h4 class="font-bold text-sm">FitLocal Gym</h4>
+                <p class="text-xs text-base-content/50">Fitness & wellness</p>
+                <div class="badge badge-info badge-sm mt-2">New</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       PRICING
+       ════════════════════════════════════════════════════════════ -->
+  <section id="pricing" class="py-24 lg:py-32">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-in">
+        <span class="badge badge-primary badge-outline mb-4">Pricing</span>
+        <h2 class="text-3xl lg:text-5xl font-black tracking-tight mb-4">
+          We Earn When You Earn
+        </h2>
+        <p class="text-base-content/60 text-lg">
+          No monthly fees. No setup costs. No hidden charges. Simple transaction-based revenue share.
+        </p>
+      </div>
+
+      <div class="max-w-lg mx-auto fade-in">
+        <div class="card bg-base-200/60 border border-primary/20 shadow-xl">
+          <div class="card-body items-center text-center p-10">
+            <div class="badge badge-primary mb-4">Recommended</div>
+            <h3 class="text-2xl font-bold mb-2">Revenue Share</h3>
+            <div class="my-6">
+              <span class="text-6xl font-black text-gradient">0€</span>
+              <span class="text-base-content/50 block mt-1">upfront</span>
+            </div>
+            <ul class="text-left space-y-3 mb-8 w-full max-w-xs">
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                Unlimited vouchers &amp; offers
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                Subscription plans with perks
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                WhatsApp &amp; email messaging
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                AI-assisted offer creation
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                QR code redemption
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                Store team management
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                Customer insights &amp; analytics
+              </li>
+            </ul>
+            <a href="#waitlist" class="btn btn-primary btn-block btn-lg">Get Started Free</a>
+            <p class="text-xs text-base-content/40 mt-3">Only pay a small percentage when you earn. No credit card required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       TESTIMONIALS / USE CASES
+       ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 bg-base-200/30">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-in">
+        <span class="badge badge-accent badge-outline mb-4">Use Cases</span>
+        <h2 class="text-3xl lg:text-5xl font-black tracking-tight mb-4">
+          Built for Every Local Business
+        </h2>
+        <p class="text-base-content/60 text-lg">
+          From cafés to gyms, localfans works for any business with a physical location and loyal customers.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">☕</div>
+            <h3 class="card-title text-lg">Cafés &amp; Bakeries</h3>
+            <p class="text-sm text-base-content/60">"2 Coffees for €5" voucher for mornings. Monthly coffee membership with free pastry perk.</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">🍽️</div>
+            <h3 class="card-title text-lg">Restaurants</h3>
+            <p class="text-sm text-base-content/60">VIP lunch plans. Schedule Tuesday dinner deals. Turn quiet nights into busy ones.</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">💇</div>
+            <h3 class="card-title text-lg">Beauty &amp; Wellness</h3>
+            <p class="text-sm text-base-content/60">Monthly haircut plans. Member-only discounts on products. Birthday surprises for regulars.</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">🏋️</div>
+            <h3 class="card-title text-lg">Gyms &amp; Studios</h3>
+            <p class="text-sm text-base-content/60">Class pass subscriptions. First-visit offers. Refer-a-friend vouchers to grow membership.</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">🛒</div>
+            <h3 class="card-title text-lg">Retail &amp; Shops</h3>
+            <p class="text-sm text-base-content/60">Seasonal deals. Loyalty rewards for repeat visitors. Exclusive access for subscribers.</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-4xl mb-3">🔧</div>
+            <h3 class="card-title text-lg">Services</h3>
+            <p class="text-sm text-base-content/60">Annual maintenance plans. First-time customer discounts. Scheduled appointment offers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       WAITLIST / CTA
+       ════════════════════════════════════════════════════════════ -->
+  <section id="waitlist" class="py-24 lg:py-32 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center fade-in">
+        <h2 class="text-3xl lg:text-5xl font-black tracking-tight mb-4">
+          Ready to Grow Your<br/>
+          <span class="text-gradient">Local Business?</span>
+        </h2>
+        <p class="text-base-content/60 text-lg mb-10 max-w-lg mx-auto">
+          Join the waitlist and be the first to know when localfans launches in your area. Early adopters get priority access.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+          <input type="email" placeholder="your@email.com" class="input input-lg grow" id="waitlist-email" />
+          <button class="btn btn-primary btn-lg glow-cta" id="waitlist-btn" onclick="handleWaitlist()">
+            Join Waitlist
+          </button>
+        </div>
+        <p class="text-xs text-base-content/40 mt-4">No spam. We'll only email you when it matters.</p>
+
+        <!-- Success message (hidden by default) -->
+        <div id="waitlist-success" class="hidden mt-6">
+          <div class="alert alert-success max-w-md mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>You're on the list! We'll be in touch soon.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════ -->
+  <footer class="footer footer-center bg-base-200 p-10">
+    <div>
+      <svg class="w-12 h-12 text-primary" viewBox="0 0 200 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100.467 26.4C89.376 26.397 78.494 29.425 69 35.158C59.504 40.891 51.756 49.11 46.594 58.927C41.431 68.743 39.05 79.785 39.707 90.857C40.365 101.929 44.036 112.61 50.325 121.747C51.641 123.699 59.685 132.438 59.685 132.438L100.275 173.739V148.142H100.467C116.447 147.893 131.688 141.37 142.9 129.982C154.113 118.593 160.397 103.253 160.397 87.271C160.397 71.29 154.113 55.949 142.9 44.561C131.688 33.172 116.447 26.65 100.467 26.4ZM100.467 121.629H100.275V136.076L75.61 110.938C69.514 104.57 66.113 96.094 66.117 87.279C66.117 86.184 66.117 85.134 66.265 84.07C66.884 77.438 69.417 71.128 73.557 65.909C77.696 60.69 83.263 56.072 89.58 54.674C95.897 52.561 102.693 52.329 109.139 54.007C115.585 55.685 120.803 59.201 125.89 64.126C130.375 69.051 133.332 75.174 134.401 81.748C135.47 88.323 134.605 95.067 131.912 101.16C129.218 107.252 124.812 112.43 119.23 116.064C113.647 119.698 107.129 121.632 100.467 121.629Z"/>
+      </svg>
+      <p class="font-bold text-lg">localfans</p>
+      <p class="text-sm text-base-content/50">CRM &amp; Loyalty Platform for Local Businesses</p>
+    </div>
+    <nav>
+      <div class="grid grid-flow-col gap-6">
+        <a href="#features" class="link link-hover text-sm">Features</a>
+        <a href="#how-it-works" class="link link-hover text-sm">How It Works</a>
+        <a href="#for-businesses" class="link link-hover text-sm">For Businesses</a>
+        <a href="#pricing" class="link link-hover text-sm">Pricing</a>
+      </div>
+    </nav>
+    <aside>
+      <p class="text-xs text-base-content/40">&copy; 2025 localfans. All rights reserved.</p>
+    </aside>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── Theme cycle (bluefans → lightfans → darkfans) ──
+    const themes = ['bluefans', 'bluedarkfans', 'lightfans', 'darkfans'];
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      document.querySelectorAll('.theme-icon').forEach(el => {
+        el.classList.toggle('hidden', el.dataset.themeIcon !== theme);
+      });
+    }
+
+    // Restore saved theme or detect system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme && themes.includes(savedTheme)) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('bluedarkfans');
+    } else {
+      setTheme('bluefans');
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const idx = themes.indexOf(current);
+      const next = themes[(idx + 1) % themes.length];
+      setTheme(next);
+    });
+
+    // ── Navbar scroll effect ──
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-base-100/90', 'backdrop-blur-lg', 'shadow-sm');
+      } else {
+        nav.classList.remove('bg-base-100/90', 'backdrop-blur-lg', 'shadow-sm');
+      }
+    });
+
+    // ── Scroll fade-in ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Waitlist handler (placeholder) ──
+    function handleWaitlist() {
+      const email = document.getElementById('waitlist-email').value;
+      if (!email || !email.includes('@')) {
+        document.getElementById('waitlist-email').classList.add('input-error');
+        return;
+      }
+      document.getElementById('waitlist-email').classList.remove('input-error');
+      // In production, this would POST to a backend endpoint
+      document.getElementById('waitlist-success').classList.remove('hidden');
+      document.getElementById('waitlist-btn').disabled = true;
+      document.getElementById('waitlist-btn').textContent = 'Joined!';
+      document.getElementById('waitlist-email').disabled = true;
+    }
+
+    // Allow Enter key to submit waitlist
+    document.getElementById('waitlist-email').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleWaitlist();
+    });
+  </script>
+
+</body>
+</html>
